@@ -1,5 +1,26 @@
-venues.json
-*.pyc
+# Python
 __pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment
 .env
+*.env
+
+# VS Code settings
+.vscode/
+
+# System files
+.DS_Store
+
+# GCP-specific temp files
+.gcloudignore
+
+# Config files
 venues.json
+venues_bakeries.json
+venues_groceries.json
+
+# Snapshots
+/tmp/
