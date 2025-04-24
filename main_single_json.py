@@ -3,19 +3,19 @@ import json
 import time
 import os
 from datetime import datetime
-import flask  # Optional, in case Google Cloud Functions uses flask.Request
 
-DEFAULT_WAIT = 15
+CONFIG_FILE = "venues.json"
 RETRY_CONFIG_PATH = "/tmp/retry_delay_config.json"
+DEFAULT_WAIT = 15
 
 # ─────────────────────────────────────────────────────
 # Load venue config from JSON
-def load_venues(config_name="venues.json"):
+def load_venues():
     try:
-        with open(config_name, "r", encoding="utf-8") as f:
+        with open(CONFIG_FILE, "r", encoding="utf-8") as f:
             return json.load(f)
     except Exception as e:
-        print(f"❌ Failed to load venues config '{config_name}': {e}")
+        print(f"❌ Failed to load venues config: {e}")
         return []
 
 # ─────────────────────────────────────────────────────
@@ -76,6 +76,7 @@ def fetch_menu(venue):
     print(f"[{venue_id}] ⏳ Waiting {wait_time} seconds...")
     time.sleep(wait_time)
 
+    # 🔁 Retry up to 3 times if not READY
     for attempt in range(3):
         menu_response = requests.get(resource_url)
         if menu_response.status_code != 200:
@@ -91,6 +92,7 @@ def fetch_menu(venue):
             continue
 
         if menu_data.get("status") == "READY":
+            # ✅ Save menu to /tmp
             timestamp = datetime.now().strftime("%Y%m%d_%H%M")
             output_dir = "/tmp/menu_snapshots"
             os.makedirs(output_dir, exist_ok=True)
@@ -105,9 +107,11 @@ def fetch_menu(venue):
             print(f"[{venue_id}] ⏳ Menu not READY yet (attempt {attempt + 1})...")
             time.sleep(3)
 
+    # ❌ If still not ready after retries
     print(f"[{venue_id}] ❌ Menu still not READY after 3 attempts.")
     increase_wait_time(venue_id)
     return None
+
 
 # ─────────────────────────────────────────────────────
 # Extract sold-out items from Wolt menu
@@ -120,8 +124,8 @@ def get_sold_out_items(menu_data):
         product = item.get("product", {})
         gtin = product.get("gtin")
         sku = product.get("sku")
-        external_id = item.get("id")
-        venue_id = menu_data.get("venue_id", "unknown")
+        external_id = item.get("id")  # fallback
+        venue_id = menu_data.get("venue_id", "unknown")  # Optional: pass venue_id as param
 
         if inventory_mode == "FORCED_OUT_OF_STOCK":
             if gtin:
@@ -130,14 +134,18 @@ def get_sold_out_items(menu_data):
                 sold_out.append({"type": "sku", "id": sku})
             elif external_id:
                 print(f"[{venue_id}] ⚠️ Skipping item with no GTIN/SKU — only using ID: {external_id}")
+                # Optional: Use "id" fallback or skip
+                # sold_out.append({"type": "id", "id": external_id})
             else:
                 print(f"[{venue_id}] ⚠️ Skipping item with no GTIN, SKU, or external_id")
                 continue
 
     return sold_out
 
+
+
 # ─────────────────────────────────────────────────────
-# Update items to in-stock via Wolt API
+# ---- Update items to in-stock via Wolt API
 def restock(venue, sold_out_items):
     venue_id = venue["venue_id"]
     username = venue["api_username"]
@@ -148,6 +156,7 @@ def restock(venue, sold_out_items):
         print(f"[{venue_id}] ✅ No sold-out items.")
         return "No updates needed."
 
+    # ✅ Remove duplicates based on (type, id)
     seen = set()
     unique_items = []
     for item in sold_out_items:
@@ -180,13 +189,13 @@ def restock(venue, sold_out_items):
         print(f"[{venue_id}] ❌ Failed to update: {response.status_code} - {response.text}")
         return f"Update failed: {response.status_code}"
 
+
 # ─────────────────────────────────────────────────────
 # MAIN Cloud Function entry
 def reset_sold_out_items(request):
-    config_name = request.args.get("config", "venues.json")
-    venues = load_venues(config_name)
+    venues = load_venues()
     if not venues:
-        return f"No venues found in config: {config_name}", 500
+        return "No venues found in config.", 500
 
     results = {}
 
