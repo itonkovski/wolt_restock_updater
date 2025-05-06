@@ -9,21 +9,21 @@ Automated system to fetch menus from Wolt, detect FORCED_OUT_OF_STOCK items, and
 - Configurable via venues.json
 
 📁 Project Structure
-cloud_function/
+- cloud_function/
 - main.py                  # Cloud Function logic
 - requirements.txt         # Dependencies for Cloud deployment
-─ venues_bakeries.json     # Bakery venues config
-─ venues_groceries.json    # Grocery venues config
+- venues_bakeries.json     # Bakery venues config
+- venues_groceries.json    # Grocery venues config
 
-local_tests/
-─ test_main.py             # Local entrypoint for testing
-─ local_test.py            # Mock runner
-─ config_loader.py         # Loads JSON configs
-─ menu_fetcher.py          # Downloads menu from Wolt
-─ sold_out_extractor.py    # Filters sold-out items
-─ restock_handler.py       # Sends in-stock update
-─ retry_utils.py           # Manages per-venue wait/retry config
-─ test.json   
+- local_tests/
+- test_main.py             # Local entrypoint for testing
+- local_test.py            # Mock runner
+- config_loader.py         # Loads JSON configs
+- menu_fetcher.py          # Downloads menu from Wolt
+- sold_out_extractor.py    # Filters sold-out items
+- restock_handler.py       # Sends in-stock update
+- retry_utils.py           # Manages per-venue wait/retry config
+- test.json   
 
 🧩 Features
 - Fetches latest menu for each venue
@@ -46,6 +46,7 @@ local_tests/
 
 ⏰ Scheduling
 Cloud Scheduler triggers the function every day at 07:00 Oslo time.
+
 gcloud scheduler jobs create http restock-daily \
   --schedule="0 7 * * *" \
   --http-method=GET \
