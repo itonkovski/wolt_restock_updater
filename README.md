@@ -10,24 +10,52 @@ Automated system to fetch menus from Wolt, detect FORCED_OUT_OF_STOCK items, and
 
 📁 Project Structure
 cloud_function/
-├── main.py                # Core logic & entrypoint
-├── venues.json            # List of venues with credentials
-├── requirements.txt       # Python dependencies (just 'requests')
+├── main.py                  # Cloud Function logic
+├── requirements.txt         # Dependencies for Cloud deployment
+├── venues_bakeries.json     # Bakery venues config
+├── venues_groceries.json    # Grocery venues config
+
+local_tests/
+├── test_main.py             # Local entrypoint for testing
+├── local_test.py            # Mock runner
+├── config_loader.py         # Loads JSON configs
+├── menu_fetcher.py          # Downloads menu from Wolt
+├── sold_out_extractor.py    # Filters sold-out items
+├── restock_handler.py       # Sends in-stock update
+├── retry_utils.py           # Manages per-venue wait/retry config
+├── test.json   
 
 🧩 Features
-- Fetches latest menu for each venue
-- Detects sold-out items (inventory_mode == FORCED_OUT_OF_STOCK)
-- Updates those items to { in_stock: true }
-- Supports both gtin and fallback to sku
-- Saves temporary snapshot (optional, /tmp)
-- Logs activity per venue
-- Works with multiple venues in parallel
+✅ Fetches latest menu for each venue
+
+✅ Detects sold-out items (inventory_mode == FORCED_OUT_OF_STOCK)
+
+✅ Restocks by setting { in_stock: true }
+
+✅ Supports both gtin and fallback to sku
+
+✅ Can exclude specific GTINs/SKUs per venue
+
+✅ Supports multiple config files (via ?config= param)
+
+✅ Logs activity and errors per venue
+
+✅ Local testing without touching Cloud Functions
+
+✅ Temporary menu snapshot to /tmp/
 
 🔐 Notes
-- Credentials use Basic Auth (username + password/token)
-- Only /tmp is writable in Cloud Functions (menu snapshots are not persisted)
-- Errors like 401 usually mean wrong credentials or Wolt API access issues
-- 429 means you've hit Wolt's rate limit (try again later)
+Basic Auth credentials required per venue
+
+Use "excluded_skus" or "excluded_gtins" fields in your config JSON
+
+Items in exclusion lists are skipped during restocking
+
+/tmp is writable in Cloud Functions; used for debug snapshots
+
+401 errors → wrong credentials
+
+429 errors → Wolt rate limit hit
 
 ⏰ Scheduling
 Cloud Scheduler triggers the function every day at 07:00 Oslo time.
