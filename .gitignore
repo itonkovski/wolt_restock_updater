@@ -21,6 +21,7 @@ __pycache__/
 venues.json
 venues_bakeries.json
 venues_groceries.json
+test.json
 
 # Snapshots
 /tmp/
