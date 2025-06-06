@@ -111,46 +111,43 @@ def fetch_menu(venue):
     increase_wait_time(venue_id)
     return None
 
-
 # ─────────────────────────────────────────────────────
-# Extract sold-out items, respecting exclusion lists
-def get_sold_out_items(menu_data, excluded_gtins=None, excluded_skus=None):
+# Extract sold-out items, respecting exclusion/inclusion lists
+def get_sold_out_items(menu_data, excluded_gtins=None, excluded_skus=None,
+                       included_gtins=None, included_skus=None):
     items = menu_data.get("menu", {}).get("items", [])
     sold_out = []
     venue_id = menu_data.get("venue_id", "unknown")
 
     excluded_gtins = set(excluded_gtins or [])
     excluded_skus = set(excluded_skus or [])
-    skipped_skus = []
-    skipped_gtins = []
+    included_gtins = set(included_gtins or [])
+    included_skus = set(included_skus or [])
 
     for item in items:
         inventory_mode = item.get("inventory_mode")
         product = item.get("product", {})
         gtin = product.get("gtin")
         sku = product.get("sku")
-        external_id = item.get("id")
 
-        if inventory_mode == "FORCED_OUT_OF_STOCK":
-            if gtin in excluded_gtins:
-                skipped_gtins.append(gtin)
-                continue
-            if sku in excluded_skus:
-                skipped_skus.append(sku)
-                continue
-            if gtin:
-                sold_out.append({"type": "gtin", "id": gtin})
-            elif sku:
-                sold_out.append({"type": "sku", "id": sku})
-            elif external_id:
-                print(f"[{venue_id}] ⚠️ Skipping item with no GTIN/SKU — using ID: {external_id}")
-            else:
-                print(f"[{venue_id}] ⚠️ Skipping item with no identifier")
+        if inventory_mode != "FORCED_OUT_OF_STOCK":
+            continue
 
-    if skipped_gtins:
-        print(f"[{venue_id}] ⏭️ Skipping GTINs: {', '.join(skipped_gtins)}")
-    if skipped_skus:
-        print(f"[{venue_id}] ⏭️ Skipping SKUs: {', '.join(skipped_skus)}")
+        if gtin in excluded_gtins or sku in excluded_skus:
+            continue
+
+        if included_gtins or included_skus:
+            if gtin and gtin not in included_gtins and not (sku and sku in included_skus):
+                continue
+            if sku and sku not in included_skus and not (gtin and gtin in included_gtins):
+                continue
+
+        if gtin:
+            sold_out.append({"type": "gtin", "id": gtin})
+        elif sku:
+            sold_out.append({"type": "sku", "id": sku})
+        else:
+            print(f"[{venue_id}] ⚠️ Skipping item with no GTIN/SKU")
 
     return sold_out
 
@@ -210,15 +207,23 @@ def reset_sold_out_items(request):
 
     for venue in venues:
         venue_id = venue.get("venue_id", "unknown")
-        excluded_gtins = set(venue.get("excluded_gtins", []))
-        excluded_skus = set(venue.get("excluded_skus", []))
+        excluded_gtins = venue.get("excluded_gtins", [])
+        excluded_skus = venue.get("excluded_skus", [])
+        included_gtins = venue.get("included_gtins", [])
+        included_skus = venue.get("included_skus", [])
 
         menu = fetch_menu(venue)
         if not menu:
             results[venue_id] = "❌ Failed to fetch menu"
             continue
 
-        sold_out_items = get_sold_out_items(menu, excluded_gtins, excluded_skus)
+        sold_out_items = get_sold_out_items(
+            menu,
+            excluded_gtins=excluded_gtins,
+            excluded_skus=excluded_skus,
+            included_gtins=included_gtins,
+            included_skus=included_skus
+        )
         print(f"[{venue_id}] 🛒 Sold-out items: {len(sold_out_items)}")
 
         result = restock(venue, sold_out_items)
