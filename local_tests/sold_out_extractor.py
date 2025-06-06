@@ -36,3 +36,7 @@ def get_sold_out_items(menu_data, excluded_gtins, excluded_skus):
         print(f"[{venue_id}] ⏭️ Skipping SKUs: {', '.join(skipped_skus)}")
 
     return sold_out
+
+def get_menu_items(menu_data):
+    """Extracts flat list of menu items from menu JSON."""
+    return menu_data.get("menu", {}).get("items", [])
