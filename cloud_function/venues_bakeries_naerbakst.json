@@ -1,0 +1,135 @@
+[
+    {
+        "venue_id": "66eab5743c203e07bb382830",
+        "api_username": "naerbakst_nor",
+        "api_password": "2c17859b2ea2aa91db51b3216ddaeb98c9f8d50284b0e38e48f26d44eaf9b086",
+        "excluded_gtins": [],
+        "excluded_skus": ["63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83"]
+      },
+      {
+        "venue_id": "66eab5743c203e07bb382831",
+        "api_username": "naerbakst_nor",
+        "api_password": "2c17859b2ea2aa91db51b3216ddaeb98c9f8d50284b0e38e48f26d44eaf9b086",
+        "excluded_gtins": [],
+        "excluded_skus": ["63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83"]
+      },
+      {
+        "venue_id": "66eab5743c203e07bb382832",
+        "api_username": "naerbakst_nor",
+        "api_password": "2c17859b2ea2aa91db51b3216ddaeb98c9f8d50284b0e38e48f26d44eaf9b086",
+        "excluded_gtins": [],
+        "excluded_skus": ["63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83"]
+      },
+      {
+        "venue_id": "66eab5743c203e07bb382833",
+        "api_username": "naerbakst_nor",
+        "api_password": "2c17859b2ea2aa91db51b3216ddaeb98c9f8d50284b0e38e48f26d44eaf9b086",
+        "excluded_gtins": [],
+        "excluded_skus": ["63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83"]
+      },
+      {
+        "venue_id": "66eab5743c203e07bb382834",
+        "api_username": "naerbakst_nor",
+        "api_password": "2c17859b2ea2aa91db51b3216ddaeb98c9f8d50284b0e38e48f26d44eaf9b086",
+        "excluded_gtins": [],
+        "excluded_skus": ["63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83"]
+      },
+      {
+        "venue_id": "66eab5743c203e07bb382835",
+        "api_username": "naerbakst_nor",
+        "api_password": "2c17859b2ea2aa91db51b3216ddaeb98c9f8d50284b0e38e48f26d44eaf9b086",
+        "excluded_gtins": [],
+        "excluded_skus": ["63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83"]
+      },
+      {
+        "venue_id": "66eab5743c203e07bb382836",
+        "api_username": "naerbakst_nor",
+        "api_password": "2c17859b2ea2aa91db51b3216ddaeb98c9f8d50284b0e38e48f26d44eaf9b086",
+        "excluded_gtins": [],
+        "excluded_skus": ["63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83"]
+      },
+      {
+        "venue_id": "66eab5743c203e07bb382837",
+        "api_username": "naerbakst_nor",
+        "api_password": "2c17859b2ea2aa91db51b3216ddaeb98c9f8d50284b0e38e48f26d44eaf9b086",
+        "excluded_gtins": [],
+        "excluded_skus": ["63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83"]
+      },
+      {
+        "venue_id": "66681cdfd9a87f3b4d5090e3",
+        "api_username": "raadebakeri_nor",
+        "api_password": "3a40c216c4b73e65b20c549d2d3a1452c11a0fce7756be552014c0366c82361c",
+        "excluded_gtins": [],
+        "excluded_skus": ["22159", "22157", "94820", "22103", "22161", "22087", "22092", "4836", "22088", "4022", "4015", "22086", "4021", "5388", "4864"]
+      },
+      {
+        "venue_id": "66681cdfd9a87f3b4d5090e4",
+        "api_username": "raadebakeri_nor",
+        "api_password": "3a40c216c4b73e65b20c549d2d3a1452c11a0fce7756be552014c0366c82361c",
+        "excluded_gtins": [],
+        "excluded_skus": ["22159", "22157", "94820", "22103", "22161", "22087", "22092", "4836", "22088", "4022", "4015", "22086", "4021", "5388", "4864"]
+      },
+      {
+        "venue_id": "66681cdfd9a87f3b4d5090e5",
+        "api_username": "raadebakeri_nor",
+        "api_password": "3a40c216c4b73e65b20c549d2d3a1452c11a0fce7756be552014c0366c82361c",
+        "excluded_gtins": [],
+        "excluded_skus": ["22159", "22157", "94820", "22103", "22161", "22087", "22092", "4836", "22088", "4022", "4015", "22086", "4021", "5388", "4864"]
+      },
+      {
+        "venue_id": "66681cdfd9a87f3b4d5090e6",
+        "api_username": "raadebakeri_nor",
+        "api_password": "3a40c216c4b73e65b20c549d2d3a1452c11a0fce7756be552014c0366c82361c",
+        "excluded_gtins": [],
+        "excluded_skus": ["22159", "22157", "94820", "22103", "22161", "22087", "22092", "4836", "22088", "4022", "4015", "22086", "4021", "5388", "4864"]
+      },
+      {
+        "venue_id": "66681cdfd9a87f3b4d5090e7",
+        "api_username": "raadebakeri_nor",
+        "api_password": "3a40c216c4b73e65b20c549d2d3a1452c11a0fce7756be552014c0366c82361c",
+        "excluded_gtins": [],
+        "excluded_skus": ["22159", "22157", "94820", "22103", "22161", "22087", "22092", "4836", "22088", "4022", "4015", "22086", "4021", "5388", "4864"]
+      },
+      {
+        "venue_id": "66681cdfd9a87f3b4d5090e8",
+        "api_username": "raadebakeri_nor",
+        "api_password": "3a40c216c4b73e65b20c549d2d3a1452c11a0fce7756be552014c0366c82361c",
+        "excluded_gtins": [],
+        "excluded_skus": ["22159", "22157", "94820", "22103", "22161", "22087", "22092", "4836", "22088", "4022", "4015", "22086", "4021", "5388", "4864"]
+      },
+      {
+        "venue_id": "66681cdfd9a87f3b4d5090e9",
+        "api_username": "raadebakeri_nor",
+        "api_password": "3a40c216c4b73e65b20c549d2d3a1452c11a0fce7756be552014c0366c82361c",
+        "excluded_gtins": [],
+        "excluded_skus": ["22159", "22157", "94820", "22103", "22161", "22087", "22092", "4836", "22088", "4022", "4015", "22086", "4021", "5388", "4864"]
+      },
+      {
+        "venue_id": "66681cdfd9a87f3b4d5090ea",
+        "api_username": "raadebakeri_nor",
+        "api_password": "3a40c216c4b73e65b20c549d2d3a1452c11a0fce7756be552014c0366c82361c",
+        "excluded_gtins": [],
+        "excluded_skus": ["22159", "22157", "94820", "22103", "22161", "22087", "22092", "4836", "22088", "4022", "4015", "22086", "4021", "5388", "4864"]
+      },
+      {
+        "venue_id": "66681cdfd9a87f3b4d5090eb",
+        "api_username": "raadebakeri_nor",
+        "api_password": "3a40c216c4b73e65b20c549d2d3a1452c11a0fce7756be552014c0366c82361c",
+        "excluded_gtins": [],
+        "excluded_skus": ["22159", "22157", "94820", "22103", "22161", "22087", "22092", "4836", "22088", "4022", "4015", "22086", "4021", "5388", "4864"]
+      },
+      {
+        "venue_id": "67224d47d8033e3e5f896ce4",
+        "api_username": "raadebakeri_nor",
+        "api_password": "3a40c216c4b73e65b20c549d2d3a1452c11a0fce7756be552014c0366c82361c",
+        "excluded_gtins": [],
+        "excluded_skus": ["22159", "22157", "94820", "22103", "22161", "22087", "22092", "4836", "22088", "4022", "4015", "22086", "4021", "5388", "4864"]
+      },
+      {
+        "venue_id": "672e12bf520463262cd46cfa",
+        "api_username": "raadebakeri_nor",
+        "api_password": "3a40c216c4b73e65b20c549d2d3a1452c11a0fce7756be552014c0366c82361c",
+        "excluded_gtins": [],
+        "excluded_skus": ["22159", "22157", "94820", "22103", "22161", "22087", "22092", "4836", "22088", "4022", "4015", "22086", "4021", "5388", "4864"]
+      }
+]

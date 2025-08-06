@@ -3,7 +3,7 @@ import json
 import time
 import os
 from datetime import datetime
-import flask  # For compatibility with Google Cloud Functions
+import flask
 
 DEFAULT_WAIT = 30
 RETRY_CONFIG_PATH = "/tmp/retry_delay_config.json"

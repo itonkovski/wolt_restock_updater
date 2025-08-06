@@ -24,6 +24,8 @@ venues_groceries.json
 venues_bakeries_godtbrod.json
 venues_narvesen.json
 test.json
+credentials.json
+token.json
 
 # Snapshots
 /tmp/

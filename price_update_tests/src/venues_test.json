@@ -1,0 +1,16 @@
+{
+    "venues": [
+      {
+        "name": "Meny Testbutikk",
+        "id": "67333fce4249d0d8991c3a63",
+        "username": "meny_restock",
+        "password": "89bb18c76f4c3daa882855d03d22634fb74fcd22adec9a91c1bccc43b4ab5a3a"
+      },
+      {
+        "name": "Meny Testbutikk (Bryn)",
+        "id": "67a6142a052fde74ab7b283a",
+        "username": "meny_bryn",
+        "password": "95cb9ffc6b84c56c6427167ef4329fc9871c6c69627fac08bf9d316d7ed0fd68"
+      }
+    ]
+  }

@@ -1,0 +1,96 @@
+2025-07-10 14:19:48,671 [INFO] file_cache is only supported with oauth2client<4.0.0
+2025-07-10 14:19:48,672 [INFO] Running query: subject:"Wolt kalkyledato" has:attachment after:2025/07/10 before:2025/07/11
+2025-07-10 14:19:49,175 [INFO] Found email: Wolt kalkyledato 11.07.25.xlsx
+2025-07-10 14:19:49,389 [INFO] Downloaded attachment: Wolt kalkyledato 11.07.25.xlsx.xlsx
+2025-07-10 14:19:49,887 [INFO] Saved raw CSV: Wolt kalkyledato 11.07.25.xlsx.csv
+2025-07-10 14:19:50,083 [INFO] Found email: RE: Wolt kalkyledato 09.07.25.xlsx
+2025-07-10 14:19:50,083 [WARNING] No Excel attachments found in message.
+2025-07-10 14:22:34,249 [INFO] file_cache is only supported with oauth2client<4.0.0
+2025-07-10 14:22:34,251 [INFO] Running query: subject:"Wolt kalkyledato" has:attachment after:2025/07/10 before:2025/07/11
+2025-07-10 14:22:34,722 [INFO] Found email: Wolt kalkyledato 11.07.25.xlsx
+2025-07-10 14:22:34,946 [INFO] Downloaded attachment: Wolt kalkyledato 11.07.25.xlsx.xlsx
+2025-07-10 14:22:35,101 [INFO] Saved raw CSV: Wolt kalkyledato 11.07.25.xlsx.csv
+2025-07-10 14:22:35,296 [INFO] Found email: RE: Wolt kalkyledato 09.07.25.xlsx
+2025-07-10 14:22:35,296 [WARNING] No Excel attachments found in message.
+2025-07-10 14:23:54,553 [INFO] file_cache is only supported with oauth2client<4.0.0
+2025-07-10 14:23:54,555 [INFO] Running query: subject:"Wolt kalkyledato" has:attachment after:2025/07/10 before:2025/07/11
+2025-07-10 14:23:55,046 [INFO] Found email: Wolt kalkyledato 11.07.25.xlsx
+2025-07-10 14:23:55,409 [INFO] Saved raw CSV: Wolt kalkyledato 11.07.25.xlsx.csv
+2025-07-10 14:23:55,608 [INFO] Found email: RE: Wolt kalkyledato 09.07.25.xlsx
+2025-07-10 14:23:55,608 [WARNING] No Excel attachments found in message.
+2025-07-10 14:26:30,092 [INFO] file_cache is only supported with oauth2client<4.0.0
+2025-07-10 14:26:30,093 [INFO] Running query: subject:"Wolt kalkyledato" has:attachment after:2025/07/10 before:2025/07/11
+2025-07-10 14:26:30,660 [INFO] Found email: Wolt kalkyledato 11.07.25.xlsx
+2025-07-10 14:26:31,028 [INFO] Saved raw CSV: Wolt kalkyledato 11.07.25.xlsx.csv
+2025-07-10 14:26:31,245 [INFO] Found email: RE: Wolt kalkyledato 09.07.25.xlsx
+2025-07-10 14:26:31,245 [WARNING] No Excel attachments found in message.
+2025-07-10 14:53:23,406 [INFO] file_cache is only supported with oauth2client<4.0.0
+2025-07-10 14:53:23,408 [INFO] Running query: subject:"Wolt kalkyledato" has:attachment after:2025/07/10 before:2025/07/11
+2025-07-10 14:53:24,015 [INFO] Found email: Wolt kalkyledato 11.07.25.xlsx
+2025-07-10 14:53:24,372 [INFO] Saved cleaned CSV: Wolt kalkyledato 11.07.25.xlsx_cleaned.csv
+2025-07-10 14:53:24,588 [INFO] Found email: RE: Wolt kalkyledato 09.07.25.xlsx
+2025-07-10 14:53:24,588 [WARNING] No Excel attachments found.
+2025-07-10 14:59:59,173 [INFO] file_cache is only supported with oauth2client<4.0.0
+2025-07-10 14:59:59,174 [INFO] Running query: subject:"Wolt kalkyledato" has:attachment after:2025/07/10 before:2025/07/11
+2025-07-10 14:59:59,746 [INFO] Found email: Wolt kalkyledato 11.07.25- test.xlsx
+2025-07-10 15:00:00,240 [ERROR] Cleaning failed for Wolt kalkyledato 11.07.25.xlsx.xlsx: can't multiply sequence by non-int of type 'float'
+2025-07-10 15:00:00,427 [INFO] Found email: Wolt kalkyledato 11.07.25.xlsx
+2025-07-10 15:00:00,689 [INFO] Saved cleaned CSV: Wolt kalkyledato 11.07.25.xlsx_cleaned.csv
+2025-07-10 15:00:00,896 [INFO] Found email: RE: Wolt kalkyledato 09.07.25.xlsx
+2025-07-10 15:00:00,897 [WARNING] No Excel attachments found.
+2025-07-10 15:07:38,077 [INFO] file_cache is only supported with oauth2client<4.0.0
+2025-07-10 15:07:38,079 [INFO] Running query: subject:"Wolt kalkyledato" has:attachment after:2025/07/10 before:2025/07/11
+2025-07-10 15:07:38,612 [INFO] Found email: Wolt kalkyledato 11.07.25- test.xlsx
+2025-07-10 15:07:39,107 [ERROR] Cleaning failed for Wolt kalkyledato 11.07.25.xlsx.xlsx: can't multiply sequence by non-int of type 'float'
+2025-07-10 15:07:39,302 [INFO] Found email: Wolt kalkyledato 11.07.25.xlsx
+2025-07-10 15:07:39,550 [INFO] Saved cleaned CSV: Wolt kalkyledato 11.07.25.xlsx_cleaned.csv
+2025-07-10 15:07:39,768 [INFO] Found email: RE: Wolt kalkyledato 09.07.25.xlsx
+2025-07-10 15:07:39,769 [WARNING] No Excel attachments found.
+2025-07-10 15:15:55,734 [INFO] file_cache is only supported with oauth2client<4.0.0
+2025-07-10 15:15:55,736 [INFO] Running query: subject:"Wolt kalkyledato" has:attachment after:2025/07/10 before:2025/07/11
+2025-07-10 15:15:56,332 [INFO] Found email: Wolt kalkyledato 11.07.25
+2025-07-10 15:15:56,698 [ERROR] Cleaning failed for Wolt kalkyledato 11.07.25.xlsx.xlsx: can't multiply sequence by non-int of type 'float'
+2025-07-10 15:15:56,869 [INFO] Found email: Wolt kalkyledato 11.07.25- test.xlsx
+2025-07-10 15:15:57,100 [ERROR] Cleaning failed for Wolt kalkyledato 11.07.25.xlsx.xlsx: can't multiply sequence by non-int of type 'float'
+2025-07-10 15:15:57,286 [INFO] Found email: Wolt kalkyledato 11.07.25.xlsx
+2025-07-10 15:15:57,539 [INFO] Saved cleaned CSV: Wolt kalkyledato 11.07.25.xlsx_cleaned.csv
+2025-07-10 15:15:57,736 [INFO] Found email: RE: Wolt kalkyledato 09.07.25.xlsx
+2025-07-10 15:15:57,736 [WARNING] No Excel attachments found.
+2025-07-10 15:17:14,065 [INFO] file_cache is only supported with oauth2client<4.0.0
+2025-07-10 15:17:14,066 [INFO] Running query: subject:"Wolt kalkyledato" has:attachment after:2025/07/10 before:2025/07/11
+2025-07-10 15:17:14,540 [INFO] Found email: Wolt kalkyledato 11.07.25.xlsx
+2025-07-10 15:17:14,541 [INFO] Skipping cleaned file: Wolt kalkyledato 11.07.25.xlsx_cleaned.csv
+2025-07-10 15:17:14,714 [INFO] Found email: Wolt kalkyledato 11.07.25
+2025-07-10 15:17:14,714 [INFO] Skipping cleaned file: Wolt kalkyledato 11.07.25.xlsx_cleaned.csv
+2025-07-10 15:17:14,909 [INFO] Found email: Wolt kalkyledato 11.07.25- test.xlsx
+2025-07-10 15:17:14,910 [INFO] Skipping cleaned file: Wolt kalkyledato 11.07.25.xlsx_cleaned.csv
+2025-07-10 15:17:15,100 [INFO] Found email: Wolt kalkyledato 11.07.25.xlsx
+2025-07-10 15:17:15,100 [INFO] Skipping cleaned file: Wolt kalkyledato 11.07.25.xlsx_cleaned.csv
+2025-07-10 15:17:15,287 [INFO] Found email: RE: Wolt kalkyledato 09.07.25.xlsx
+2025-07-10 15:17:15,287 [WARNING] No Excel attachments found.
+2025-07-10 15:17:32,306 [INFO] file_cache is only supported with oauth2client<4.0.0
+2025-07-10 15:17:32,307 [INFO] Running query: subject:"Wolt kalkyledato" has:attachment after:2025/07/10 before:2025/07/11
+2025-07-10 15:17:32,769 [INFO] Found email: Wolt kalkyledato 11.07.25.xlsx
+2025-07-10 15:17:33,103 [ERROR] Cleaning failed for Wolt kalkyledato 11.07.25.xlsx.xlsx: can't multiply sequence by non-int of type 'float'
+2025-07-10 15:17:33,281 [INFO] Found email: Wolt kalkyledato 11.07.25
+2025-07-10 15:17:33,533 [ERROR] Cleaning failed for Wolt kalkyledato 11.07.25.xlsx.xlsx: can't multiply sequence by non-int of type 'float'
+2025-07-10 15:17:33,706 [INFO] Found email: Wolt kalkyledato 11.07.25- test.xlsx
+2025-07-10 15:17:33,969 [ERROR] Cleaning failed for Wolt kalkyledato 11.07.25.xlsx.xlsx: can't multiply sequence by non-int of type 'float'
+2025-07-10 15:17:34,177 [INFO] Found email: Wolt kalkyledato 11.07.25.xlsx
+2025-07-10 15:17:34,413 [INFO] Saved cleaned CSV: Wolt kalkyledato 11.07.25.xlsx_cleaned.csv
+2025-07-10 15:17:34,618 [INFO] Found email: RE: Wolt kalkyledato 09.07.25.xlsx
+2025-07-10 15:17:34,618 [WARNING] No Excel attachments found.
+2025-07-10 15:21:02,355 [INFO] file_cache is only supported with oauth2client<4.0.0
+2025-07-10 15:21:02,356 [INFO] Running query: subject:"Wolt kalkyledato" has:attachment after:2025/07/10 before:2025/07/11
+2025-07-10 15:21:02,814 [INFO] Found email: Wolt kalkyledato 11.07.25.xlsx
+2025-07-10 15:21:03,279 [INFO] Saved cleaned CSV: Wolt kalkyledato 11.07.25.xlsx (1)_cleaned.csv
+2025-07-10 15:21:03,469 [INFO] Found email: Wolt kalkyledato 11.07.25.xlsx
+2025-07-10 15:21:03,715 [INFO] Saved cleaned CSV: Wolt kalkyledato 11.07.25.xlsx_cleaned.csv
+2025-07-10 15:21:03,919 [INFO] Found email: RE: Wolt kalkyledato 09.07.25.xlsx
+2025-07-10 15:21:03,920 [WARNING] No Excel attachments found.
+2025-07-10 15:44:38,787 [INFO] file_cache is only supported with oauth2client<4.0.0
+2025-07-10 15:44:38,788 [INFO] Running query: subject:"Wolt kalkyledato" has:attachment after:2025/07/09 before:2025/07/10
+2025-07-10 15:44:39,376 [INFO] Found email: SV: Wolt kalkyledato 09.07.25.xlsx
+2025-07-10 15:44:39,376 [WARNING] No Excel attachments found.
+2025-07-10 15:44:39,628 [INFO] Found email: SV: Wolt kalkyledato 09.07.25.xlsx
+2025-07-10 15:44:39,628 [WARNING] No Excel attachments found.

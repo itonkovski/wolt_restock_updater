@@ -6,6 +6,7 @@ import logging
 import csv
 import json
 import time
+import uuid
 from pathlib import Path
 from io import BytesIO
 
@@ -17,11 +18,17 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from google.oauth2.credentials import Credentials
 from googleapiclient.errors import HttpError
+from google.cloud import storage
 
 # --- Config ---
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 TMP_DIR = Path("/tmp")
 CONFIG_PATH = Path("config/venues.json")
+BUCKET_NAME = "price-update-csvs"
+
+# --- Logging Setup ---
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+log = logging.getLogger()
 
 # --- Gmail Authentication ---
 def authenticate_gmail():
@@ -49,6 +56,14 @@ def find_attachments_recursively(parts):
             attachments.extend(find_attachments_recursively(part["parts"]))
     return attachments
 
+# --- Upload to GCS ---
+def upload_to_gcs(file_path):
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(BUCKET_NAME)
+    blob = bucket.blob(file_path.name)
+    blob.upload_from_filename(str(file_path))
+    log.info(f"✅ Uploaded to GCS: {file_path.name}")
+
 # --- Clean Excel and Save ---
 def clean_and_convert_to_csv(excel_bytes, original_filename):
     try:
@@ -73,25 +88,25 @@ def clean_and_convert_to_csv(excel_bytes, original_filename):
         cleaned_path = TMP_DIR / cleaned_name
         df[["merchant_sku", "price"]].to_csv(cleaned_path, index=False)
 
-        print(f"✅ Cleaned and saved: {cleaned_path}")
+        upload_to_gcs(cleaned_path)
         return cleaned_path
 
     except Exception as e:
-        print(f"❌ Failed to clean {original_filename}: {e}")
+        log.warning(f"❌ Failed to clean: {original_filename} — {e}")
         return None
 
 # --- Gmail Fetch ---
 def fetch_and_clean_from_gmail():
     service = authenticate_gmail()
-    from_date = "2025/07/07"
-    to_date = datetime.date.today().strftime("%Y/%m/%d")
-    query = f'subject:"Wolt kalkyledato" has:attachment after:{from_date} before:{to_date}'
+    yesterday = datetime.date.today() - datetime.timedelta(days=1)
+    after = yesterday.strftime("%Y/%m/%d")
+    before = (yesterday + datetime.timedelta(days=1)).strftime("%Y/%m/%d")
+    query = f'subject:"Wolt kalkyledato" has:attachment after:{after} before:{before}'
 
-    print(f"🔍 Gmail query: {query}")
+    log.info(f"🔍 Gmail query: {query}")
     results = service.users().messages().list(userId='me', q=query).execute()
     messages = results.get('messages', [])
     cleaned_files = []
-    today_str = datetime.date.today().strftime("%d.%m.%y")
 
     for msg in messages:
         msg_data = service.users().messages().get(userId='me', id=msg['id']).execute()
@@ -100,11 +115,9 @@ def fetch_and_clean_from_gmail():
 
         for attachment_info in attachments:
             filename = attachment_info['filename']
-            if today_str not in filename:
-                continue
             cleaned_path = TMP_DIR / (Path(filename).stem + "_cleaned.csv")
-            # if cleaned_path.exists():
-            #    continue
+            if cleaned_path.exists():
+                continue
             attachment = service.users().messages().attachments().get(
                 userId='me', messageId=msg['id'], id=attachment_info['attachmentId']
             ).execute()
@@ -113,38 +126,52 @@ def fetch_and_clean_from_gmail():
             if cleaned_csv:
                 cleaned_files.append(cleaned_csv)
 
-    print(f"📥 Total files prepared: {len(cleaned_files)}")
     return cleaned_files
+
+# --- GCS Lookup for Today's Files ---
+def get_today_csvs_from_gcs():
+    today = datetime.date.today()
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(BUCKET_NAME)
+    blobs = list(bucket.list_blobs())
+
+    today_files = []
+    for blob in blobs:
+        match = re.search(r'(\d{2}\.\d{2}\.\d{2})', blob.name)
+        if match:
+            try:
+                file_date = datetime.datetime.strptime(match.group(1), "%d.%m.%y").date()
+                if file_date == today:
+                    local_path = TMP_DIR / f"{uuid.uuid4()}_{Path(blob.name).name}"
+                    blob.download_to_filename(str(local_path))
+                    today_files.append(local_path)
+                    log.info(f"📄 Downloaded for today: {blob.name}")
+            except ValueError:
+                continue
+    return today_files
 
 # --- Load Price Updates ---
 def load_all_price_updates(csv_files):
     all_items = {}
     for csv_path in csv_files:
-        print(f"📄 Reading: {csv_path.name}")
+        log.info(f"📄 Reading: {csv_path.name}")
         with open(csv_path, newline='') as f:
             reader = csv.DictReader(f)
-            for i, row in enumerate(reader, 1):
+            for row in reader:
                 try:
                     sku = row["merchant_sku"].strip()
                     price_eur = float(row["price"])
-                    price_cents = int(round(price_eur * 100))
+                    price_cents = int(price_eur * 100)
                     all_items[sku] = price_cents
-                    print(f"✅ Will update: {sku} → {price_cents} cents")
                 except Exception as e:
-                    print(f"⚠️ Skipping row #{i} in {csv_path.name}: {row} — Reason: {e}")
-    item_list = [{"gtin": sku, "price": price} for sku, price in all_items.items()]
-    print(f"🧾 Total valid items prepared: {len(item_list)}")
-    return item_list
+                    log.warning(f"⚠️ Skipping row in {csv_path.name}: {e}")
+    return [{"gtin": sku, "price": price} for sku, price in all_items.items()]
 
 # --- Update Venue ---
 def update_venue(venue, items):
     url = f"https://pos-integration-service.wolt.com/venues/{venue['id']}/items"
     payload = {"data": items}
-    print(f"📡 Updating {venue['name']} ({venue['id']}) with {len(items)} items...")
-
-    for i, item in enumerate(items, 1):
-        print(f"   🔢 {i}. GTIN: {item['gtin']} → {item['price']} cents")
-
+    log.info(f"📡 Sending update to {venue['name']} (ID: {venue['id']})...")
     try:
         response = requests.patch(
             url,
@@ -153,62 +180,43 @@ def update_venue(venue, items):
             json=payload
         )
         if response.status_code == 202:
-            print(f"✅ Successfully updated {len(items)} items at {venue['name']}")
+            log.info(f"✅ Success: Updated {len(items)} items")
         elif response.status_code == 429:
-            print(f"🔁 Rate limited (429) by Wolt for {venue['name']}")
+            log.warning("🔁 Rate limited by Wolt (429). Consider retrying later.")
         else:
-            print(f"❌ Failed update for {venue['name']}: {response.status_code} — {response.text}")
+            log.error(f"❌ Error {response.status_code}: {response.text}")
     except Exception as e:
-        print(f"🚨 Network error with {venue['name']}: {e}")
-
+        log.error(f"🚨 Network error: {e}")
 
 # --- Core Logic ---
 def run_update_process():
-    print("⚙️ Starting update process...")
-    try:
-        with open(CONFIG_PATH) as f:
-            config = json.load(f)
-        venues = config["venues"]
-    except Exception as e:
-        print("❌ Failed to load config:", e)
+    with open(CONFIG_PATH) as f:
+        config = json.load(f)
+    venues = config["venues"]
+
+    fetch_and_clean_from_gmail()
+    relevant_files = get_today_csvs_from_gcs()
+
+    if not relevant_files:
+        log.warning("⚠️ No relevant CSVs for today.")
         return
 
-    try:
-        relevant_files = fetch_and_clean_from_gmail()
-        if not relevant_files:
-            print("⚠️ No relevant CSVs found.")
-            return
+    items = load_all_price_updates(relevant_files)
+    if not items:
+        log.warning("⚠️ No valid items found in CSVs.")
+        return
 
-        items = load_all_price_updates(relevant_files)
-        if not items:
-            print("⚠️ No valid items found.")
-            return
+    for venue in venues:
+        update_venue(venue, items)
+        time.sleep(1)
 
-        print(f"🏪 Loaded {len(venues)} venues from config.")
-        for venue in venues:
-            venue_name = venue.get("name", "Unnamed Venue")
-            venue_id = venue.get("id")
-            if not venue_id or not venue.get("username") or not venue.get("password"):
-                print(f"⚠️ Skipping venue '{venue_name}' — missing credentials.")
-                continue
-            print(f"➡️ Processing venue: {venue_name} ({venue_id})")
-            update_venue(venue, items)
-            time.sleep(1)
-
-        print(f"🎯 Update process completed for {len(venues)} venue(s).")
-    except Exception as e:
-        print("❌ Unexpected error in run_update_process():", e)
-        import traceback
-        print(traceback.format_exc())
+    log.info(f"🎯 Update process completed for {len(venues)} venue(s).")
 
 # --- HTTP Entry Point ---
 def main(request: Request):
-    print("🚀 Function triggered at", datetime.datetime.utcnow().isoformat())
     try:
         run_update_process()
         return jsonify({"status": "success"}), 200
     except Exception as e:
-        import traceback
-        print("🔥 Unhandled error in main():", e)
-        print(traceback.format_exc())
+        log.exception("Unhandled error")
         return jsonify({"status": "error", "message": str(e)}), 500

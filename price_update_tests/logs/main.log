@@ -1,0 +1,22 @@
+2025-07-10 11:51:08,033 [INFO] Processing file: Wolt kalkyledato 10.07.25.xlsx - WOLT.csv
+2025-07-10 11:51:08,033 [INFO] Sending update to Meny Testbutikk (ID: 67333fce4249d0d8991c3a63)
+2025-07-10 11:51:08,359 [INFO] Successfully updated 3 items for Meny Testbutikk
+2025-07-10 11:51:08,360 [INFO] Sending update to Meny Testbutikk (Bryn) (ID: 67a6142a052fde74ab7b283a)
+2025-07-10 11:51:08,534 [INFO] Successfully updated 3 items for Meny Testbutikk (Bryn)
+2025-07-10 11:51:08,535 [INFO] Processing file: Wolt kalkyledato 10.07.25.xlsx - del 2.csv
+2025-07-10 11:51:08,536 [INFO] Sending update to Meny Testbutikk (ID: 67333fce4249d0d8991c3a63)
+2025-07-10 11:51:08,883 [ERROR] Failed update for Meny Testbutikk: 429 - Too many requests
+2025-07-10 11:51:08,883 [INFO] Sending update to Meny Testbutikk (Bryn) (ID: 67a6142a052fde74ab7b283a)
+2025-07-10 11:51:09,139 [ERROR] Failed update for Meny Testbutikk (Bryn): 429 - Too many requests
+2025-07-10 13:03:08,457 [INFO] Reading CSV: Wolt kalkyledato 10.07.25.xlsx - WOLT.csv
+2025-07-10 13:03:08,458 [INFO] Reading CSV: Wolt kalkyledato 10.07.25.xlsx - del 2.csv
+2025-07-10 13:03:08,458 [INFO] Sending update to Meny Testbutikk (ID: 67333fce4249d0d8991c3a63)
+2025-07-10 13:03:08,705 [INFO] ✅ Updated 4 items for Meny Testbutikk
+2025-07-10 13:03:08,707 [INFO] Sending update to Meny Testbutikk (Bryn) (ID: 67a6142a052fde74ab7b283a)
+2025-07-10 13:03:09,018 [INFO] ✅ Updated 4 items for Meny Testbutikk (Bryn)
+2025-07-10 15:47:31,957 [WARNING] No CSVs found for today.
+2025-07-10 15:48:12,092 [INFO] Reading CSV: Wolt kalkyledato 10.07.25.xlsx - del 2_cleaned.csv
+2025-07-10 15:48:12,092 [INFO] Sending update to Meny Testbutikk (ID: 67333fce4249d0d8991c3a63)
+2025-07-10 15:48:12,419 [INFO] ✅ Updated 1 items for Meny Testbutikk
+2025-07-10 15:48:12,421 [INFO] Sending update to Meny Testbutikk (Bryn) (ID: 67a6142a052fde74ab7b283a)
+2025-07-10 15:48:12,712 [INFO] ✅ Updated 1 items for Meny Testbutikk (Bryn)
